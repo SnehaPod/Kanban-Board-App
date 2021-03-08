@@ -1,4 +1,7 @@
-# todo-app
+# kanban-board
+
+Kanban Task Board using Vuejs. User can add, edit and delete cards (tasks). This app also
+facilitates sorting and re-ordering of cards.
 
 ## Project setup
 ```
