@@ -3,42 +3,42 @@
     <navbar-component></navbar-component>
     <div class="container mt-4">
       <div class="row">
-
         <!-- Added Tasks -->
         <div class="col-lg-3 col-md-6 col-sm-12">
           <div class="task-type text-left mb-3">Tasks</div>
 
           <!-- List of tasks -->
-          <draggable v-model="todosTasks" animation: 200 handle=".task-handle1" group="tasks" @start="drag=true" @end="drag=false" >
-            <div v-for="todo in todosTasks" :key="todo.id">
-                    <b-card
-                      text-variant="dark"
-                      class="text-left todo-card-title px-0 mb-2 cursor-pointer"
-                      v-bind:style="{ 'background-color': todo.bgColor }"
-                    >
-                      <b-card-text class="d-flex">
-                        <div class="task-handle1" v-b-tooltip.hover title="Drag to re-order">
-                          <b-icon
-                            class="icons border-secondary mr-1 text-muted"
-                            scale="0.85"
-                            icon="list"
-                          ></b-icon>
-                        </div>
-                        <div @click="showDescModal(todo.id)">
-                          {{ todo.title }}
-                        </div>
+          <draggable class="list-group" v-model="todosTasks" animation: 200 handle=".task-handle1" :group="{name:'tasks', pull: true, put: true}" @start="drag=true" @end="drag=false" @change="log('Tasks', $event)">
+            <!-- <div > -->
+              <b-card
+                v-for="(todo) in todosTasks" :key="todo.id"
+                text-variant="dark"
+                class="text-left todo-card-title px-0 mb-2 cursor-pointer"
+                v-bind:style="{ 'background-color': todo.bgColor }"
+              >
+                <b-card-text class="d-flex">
+                  <div class="task-handle1" v-b-tooltip.hover title="Drag to re-order">
+                    <b-icon
+                      class="icons border-secondary mr-1 text-muted"
+                      scale="0.85"
+                      icon="list"
+                    ></b-icon>
+                  </div>
+                  <div @click="showDescModal(todo.id)">
+                    {{ todo.title }} 
+                  </div>
 
-                        <div>
-                          <b-icon
-                            class="icons border-secondary ml-1 text-muted"
-                            scale="0.85"
-                            icon="trash"
-                            @click="deleteCard(todo.id)"
-                          ></b-icon>
-                        </div>
-                      </b-card-text>
-                    </b-card>
-            </div>
+                  <div>
+                    <b-icon
+                      class="icons border-secondary ml-1 text-muted"
+                      scale="0.85"
+                      icon="trash"
+                      @click="deleteCard(todo.id)"
+                    ></b-icon>
+                  </div>
+                </b-card-text>
+              </b-card>
+            <!-- </div> -->
           </draggable>
           <!-- -->
 
@@ -172,9 +172,10 @@
           <div class="task-type text-left mb-3">Completed</div>
 
           <!-- List of tasks -->
-          <draggable v-model="todosCompleted" animation: 200 handle=".task-handle2" group="tasks" @start="drag=true" @end="drag=false" >
-            <div v-for="todo in todosCompleted" :key="todo.id">
+          <draggable class="list-group" v-model="todosCompleted" animation: 200 handle=".task-handle2" :group="{name:'tasks', pull: true, put: true}" @start="drag=true" @end="drag=false" @change="log('Completed', $event)" >
+            <!-- <div > -->
                     <b-card
+                      v-for="(todo) in todosCompleted" :key="todo.id"
                       text-variant="dark"
                       class="text-left todo-card-title px-0 mb-2 cursor-pointer"
                       v-bind:style="{ 'background-color': todo.bgColor }"
@@ -188,7 +189,7 @@
                           ></b-icon>
                         </div>
                         <div @click="showDescModal(todo.id)">
-                          {{ todo.title }}
+                          {{ todo.title }} 
                         </div>
 
                         <div>
@@ -201,7 +202,7 @@
                         </div>
                       </b-card-text>
                     </b-card>
-            </div>
+            <!-- </div> -->
           </draggable>
           <!-- -->
 
@@ -339,9 +340,10 @@
           <div class="task-type text-left mb-3">Deferred</div>
 
           <!-- List of tasks -->
-          <draggable v-model="todosDeferred" handle=".task-handle3" group="tasks" @start="drag=true" @end="drag=false" >
-            <div v-for="todo in todosDeferred" :key="todo.id">
+          <draggable class="list-group" v-model="todosDeferred" handle=".task-handle3" :group="{name:'tasks', pull: true, put: true}" @start="drag=true" @end="drag=false" @change="log('Deferred', $event)" >
+            <!-- <div > -->
                     <b-card
+                      v-for="(todo) in todosDeferred" :key="todo.id"
                       text-variant="dark"
                       class="text-left todo-card-title px-0 mb-2 cursor-pointer"
                       v-bind:style="{ 'background-color': todo.bgColor }"
@@ -355,7 +357,7 @@
                           ></b-icon>
                         </div>
                         <div @click="showDescModal(todo.id)">
-                          {{ todo.title }}
+                          {{ todo.title }} 
                         </div>
 
                         <div>
@@ -368,7 +370,7 @@
                         </div>
                       </b-card-text>
                     </b-card>
-            </div>
+            <!-- </div> -->
           </draggable>
           <!--  -->
 
@@ -507,9 +509,10 @@
           <div class="task-type text-left mb-3">Rejected</div>
 
           <!-- List of tasks -->
-          <draggable v-model="todosRejected" handle=".task-handle4" group="tasks" @start="drag=true" @end="drag=false" >
-            <div v-for="todo in todosRejected" :key="todo.id">
+          <draggable class="list-group" v-model="todosRejected" handle=".task-handle4" :group="{name:'tasks', pull: true, put: true}" @start="drag=true" @end="drag=false" @change="log('Rejected', $event)" >
+            <!-- <div > -->
                     <b-card
+                      v-for="(todo) in todosRejected" :key="todo.id"
                       text-variant="dark"
                       class="text-left todo-card-title px-0 mb-2 cursor-pointer"
                       v-bind:style="{ 'background-color': todo.bgColor }"
@@ -523,7 +526,7 @@
                           ></b-icon>
                         </div>
                         <div @click="showDescModal(todo.id)">
-                          {{ todo.title }}
+                          {{ todo.title }} 
                         </div>
 
                         <div>
@@ -536,7 +539,7 @@
                         </div>
                       </b-card-text>
                     </b-card>
-            </div>
+            <!-- </div> -->
           </draggable>
           <!--  -->
 
@@ -681,7 +684,6 @@ export default {
   name: "ToDoList",
   data() {
     return {
-      // order: 1,
       todosTasks: [],
       todosCompleted: [],
       todosDeferred: [],
@@ -707,17 +709,20 @@ export default {
         description: "",
         status: "",
         bgColor: "",
+        order: "",
       },
     };
   },
   mounted() {
     this.populateTodos();
+    this.sortTodos();
     this.isTaskAddNewCardHidden = false;
     this.isCompletedAddNewCardHidden = false;
     this.isDeferredAddNewCardHidden = false;
     this.isRejectedAddNewCardHidden = false;
   },
   methods: {
+    // Segregate todos based on status
     populateTodos: function () {
       this.todosTasks = this.todosArray.filter((el) => el.status == "Tasks");
       this.todosCompleted = this.todosArray.filter(
@@ -730,39 +735,82 @@ export default {
         (el) => el.status == "Rejected"
       );
     },
+    // Sort todos based on order
+    sortTodos: function () {
+      this.todosTasks = this.todosTasks.sort((a, b) => {
+        if (a.order < b.order) {
+          return -1;
+        }
+        if (a.order > b.order) {
+          return 1;
+        }
+        return 0;
+      });
+      this.todosCompleted = this.todosCompleted.sort((a, b) => {
+        if (a.order < b.order) {
+          return -1;
+        }
+        if (a.order > b.order) {
+          return 1;
+        }
+        return 0;
+      });
+      this.todosDeferred = this.todosDeferred.sort((a, b) => {
+        if (a.order < b.order) {
+          return -1;
+        }
+        if (a.order > b.order) {
+          return 1;
+        }
+        return 0;
+      });
+      this.todosRejected = this.todosRejected.sort((a, b) => {
+        if (a.order < b.order) {
+          return -1;
+        }
+        if (a.order > b.order) {
+          return 1;
+        }
+        return 0;
+      });
+    },
+    // Reset props
     reset: function () {
       this.isTaskAddNewCardHidden = false;
       this.isCompletedAddNewCardHidden = false;
       this.isDeferredAddNewCardHidden = false;
       this.isRejectedAddNewCardHidden = false;
       this.newTodo = {
+        title: "",
         status: "",
         description: "",
         bgColor: "",
+        order: "",
       };
     },
+    // Generate random bgColor for each newly added card
     randomizeBackground: function () {
       return this.bgColors[Math.floor(Math.random() * this.bgColors.length)][
         "value"
       ];
     },
+    // Add a new card
     addNewCard: function (type) {
       this.newTodo.status = type;
       this.newTodo.id = this.getLastId() + 1;
+      this.newTodo.order = this.getOrderSeq(type) + 1;
       this.todosArray = localStorage.getItem("todosArray")
         ? JSON.parse(localStorage.getItem("todosArray"))
         : [];
       this.todosArray.push(this.newTodo);
       this.newTodo.bgColor = this.randomizeBackground();
-      console.log("this.newTodo", this.newTodo);
       if (this.newTodo.title !== "") {
         localStorage.setItem("todosArray", JSON.stringify(this.todosArray));
         this.reset();
         this.populateTodos();
-      } else {
-        console.log("Invalid");
       }
     },
+    // Add description for the card from the modal
     addCardDescription: function (todo) {
       this.todosArray = localStorage.getItem("todosArray")
         ? JSON.parse(localStorage.getItem("todosArray"))
@@ -774,27 +822,12 @@ export default {
           }
         }, this.todosArray);
 
-        console.log("this.todosArray", this.todosArray);
-
         localStorage.setItem("todosArray", JSON.stringify(this.todosArray));
         this.reset();
         this.populateTodos();
       }
     },
-    showDescModal: function (todoId) {
-      console.log("Desc modal", todoId);
-      var modalId = "cardDescription" + "-" + todoId;
-      console.log("modalId", modalId, this.$bvModal);
-      this.$bvModal.show(modalId);
-    },
-    getLastId: function () {
-      this.todosArray = this.todosArray.sort((a, b) =>
-        a.id > b.id ? -1 : b.id > a.id ? 1 : 0
-      );
-      return this.todosArray[0] && this.todosArray[0].id
-        ? this.todosArray[0].id
-        : 0;
-    },
+    // Delete a card
     deleteCard: function (todoId) {
       if (confirm("Do you really want to delete the card?")) {
         var index = this.todosArray.findIndex((el) => {
@@ -805,7 +838,91 @@ export default {
         this.reset();
         this.populateTodos();
       }
-    }
+    },
+    // Open the description modal
+    showDescModal: function (todoId) {
+      var modalId = "cardDescription" + "-" + todoId;
+      this.$bvModal.show(modalId);
+    },
+    // Get counter for autoincrementing id
+    getLastId: function () {
+      this.todosArray = this.todosArray.sort((a, b) =>
+        a.id > b.id ? -1 : b.id > a.id ? 1 : 0
+      );
+      return this.todosArray[0] && this.todosArray[0].id
+        ? this.todosArray[0].id
+        : 0;
+    },
+    // Get counter for setting the order for item
+    getOrderSeq: function (status) {
+      var arrName = "";
+      switch (status) {
+        case "Tasks":
+          arrName = "todosTasks";
+          break;
+        case "Completed":
+          arrName = "todosCompleted";
+          break;
+        case "Deferred":
+          arrName = "todosDeferred";
+          break;
+        case "Rejected":
+          arrName = "todosRejected";
+          break;
+      }
+
+      this[arrName] = this[arrName].sort((a, b) =>
+        a.order > b.order ? -1 : b.order > a.order ? 1 : 0
+      );
+      return this[arrName][0] && this[arrName][0].order
+        ? this[arrName][0].order
+        : 0;
+    },
+    // Log changes for draggable elements
+    log: function (statusType, event) {
+      if (event.moved) {
+        var status = event.moved.element.status;
+        var arrName;
+        let self = this;
+        switch (status) {
+          case "Tasks":
+            arrName = "todosTasks";
+            break;
+          case "Completed":
+            arrName = "todosCompleted";
+            break;
+          case "Deferred":
+            arrName = "todosDeferred";
+            break;
+          case "Rejected":
+            arrName = "todosRejected";
+            break;
+        }
+
+        this[arrName].map((todo, index) => {
+          todo.order = index + 1;
+        });
+
+        this[arrName].forEach((todo) => {
+          self.todosArray.forEach(function (el, index) {
+            if (this[index].id == todo.id) {
+              this[index] = todo;
+            }
+          }, self.todosArray);
+
+          localStorage.setItem("todosArray", JSON.stringify(this.todosArray));
+        });
+      }
+      if (event.added) {
+        this.todosArray.forEach(function (el, index) {
+          if (this[index].id == event.added.element.id) {
+            this[index].status = statusType;
+            this[index].order = event.added.newIndex + 1;
+          }
+        }, this.todosArray);
+        localStorage.setItem("todosArray", JSON.stringify(this.todosArray));
+      }
+    },
   },
   components: {
     "navbar-component": NavbarComponent,
@@ -815,10 +932,6 @@ export default {
 </script>
 
 <style scoped>
-/* .container {
-  margin-left: 10px;
-} */
-
 .task-type {
   font-family: "Quicksand", sans-serif;
   font-size: 20px;
