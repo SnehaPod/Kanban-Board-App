@@ -681,7 +681,7 @@ export default {
   name: "ToDoList",
   data() {
     return {
-      order: 1,
+      // order: 1,
       todosTasks: [],
       todosCompleted: [],
       todosDeferred: [],
@@ -815,9 +815,9 @@ export default {
 </script>
 
 <style scoped>
-.container {
+/* .container {
   margin-left: 10px;
-}
+} */
 
 .task-type {
   font-family: "Quicksand", sans-serif;
